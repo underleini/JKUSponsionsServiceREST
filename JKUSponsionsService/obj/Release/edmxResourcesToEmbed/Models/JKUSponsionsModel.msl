@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="JKUSponsionsServiceModelStoreContainer" CdmEntityContainer="JKUSponsionsServiceEntities">
+    <EntitySetMapping Name="Location">
+      <EntityTypeMapping TypeName="JKUSponsionsServiceModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Member">
+      <EntityTypeMapping TypeName="JKUSponsionsServiceModel.Member">
+        <MappingFragment StoreEntitySet="Member">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Matrikelnumber" ColumnName="Matrikelnumber" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Curricula" ColumnName="Curricula" />
+          <ScalarProperty Name="MasterThesis" ColumnName="MasterThesis" />
+          <ScalarProperty Name="Sponsionsevent" ColumnName="Sponsionsevent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rep_Event">
+      <EntityTypeMapping TypeName="JKUSponsionsServiceModel.Rep_Event">
+        <MappingFragment StoreEntitySet="Rep_Event">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sponsionsevent" ColumnName="Sponsionsevent" />
+          <ScalarProperty Name="Representative" ColumnName="Representative" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Representative">
+      <EntityTypeMapping TypeName="JKUSponsionsServiceModel.Representative">
+        <MappingFragment StoreEntitySet="Representative">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SponsionsEvent">
+      <EntityTypeMapping TypeName="JKUSponsionsServiceModel.SponsionsEvent">
+        <MappingFragment StoreEntitySet="SponsionsEvent">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SponsionsDate" ColumnName="SponsionsDate" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

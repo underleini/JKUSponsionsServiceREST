@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="JKUSponsionsServiceEntities-Web.config Connection String" description="JKUSponsionsServiceEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.SponsionsModel.csdl|res://*/Models.SponsionsModel.ssdl|res://*/Models.SponsionsModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=leinweb.database.windows.net;initial catalog=JKUSponsionsService;persist security info=True;user id=richard;password=leinrich+0+;multipleactiveresultsets=True;application name=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Studium\\7\.Semester\\KV\ Service\ Engineering\\04\\code\\JKUSponsionsService\\JKUSponsionsService\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='JKUSponsionsServiceEntities']/@connectionString" />
+  </parameter>
+  <parameter name="JKUSponsionsServiceEntities1-Web.config Connection String" description="JKUSponsionsServiceEntities1 Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.SponsionsModel.csdl|res://*/Models.SponsionsModel.ssdl|res://*/Models.SponsionsModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=leinweb.database.windows.net;initial catalog=JKUSponsionsService;persist security info=True;user id=richard;password=leinrich+0+;multipleactiveresultsets=True;application name=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Studium\\7\.Semester\\KV\ Service\ Engineering\\04\\code\\JKUSponsionsService\\JKUSponsionsService\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='JKUSponsionsServiceEntities1']/@connectionString" />
+  </parameter>
+</parameters>

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JKUSponsionsServiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SponsionsEvent" Relationship="Self.FK_SponsionsEvent_Location" FromRole="Location" ToRole="SponsionsEvent" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Matrikelnumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Curricula" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MasterThesis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Sponsionsevent" Type="Int32" />
+    <NavigationProperty Name="SponsionsEvent1" Relationship="Self.FK_Member_Sponsionsevent" FromRole="Member" ToRole="SponsionsEvent" />
+  </EntityType>
+  <EntityType Name="Rep_Event">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sponsionsevent" Type="Int32" />
+    <Property Name="Representative" Type="Int32" />
+    <NavigationProperty Name="Representative1" Relationship="Self.FK_Rep_Event_Representative" FromRole="Rep_Event" ToRole="Representative" />
+    <NavigationProperty Name="SponsionsEvent1" Relationship="Self.FK_Rep_Event_Sponsionsevent" FromRole="Rep_Event" ToRole="SponsionsEvent" />
+  </EntityType>
+  <EntityType Name="Representative">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Rep_Event" Relationship="Self.FK_Rep_Event_Representative" FromRole="Representative" ToRole="Rep_Event" />
+  </EntityType>
+  <EntityType Name="SponsionsEvent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SponsionsDate" Type="DateTime" Precision="3" />
+    <Property Name="Location" Type="Int32" />
+    <NavigationProperty Name="Location1" Relationship="Self.FK_SponsionsEvent_Location" FromRole="SponsionsEvent" ToRole="Location" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_Member_Sponsionsevent" FromRole="SponsionsEvent" ToRole="Member" />
+    <NavigationProperty Name="Rep_Event" Relationship="Self.FK_Rep_Event_Sponsionsevent" FromRole="SponsionsEvent" ToRole="Rep_Event" />
+  </EntityType>
+  <Association Name="FK_SponsionsEvent_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="SponsionsEvent" Type="Self.SponsionsEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SponsionsEvent">
+        <PropertyRef Name="Location" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_Sponsionsevent">
+    <End Role="SponsionsEvent" Type="Self.SponsionsEvent" Multiplicity="0..1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SponsionsEvent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="Sponsionsevent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rep_Event_Representative">
+    <End Role="Representative" Type="Self.Representative" Multiplicity="0..1" />
+    <End Role="Rep_Event" Type="Self.Rep_Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Representative">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rep_Event">
+        <PropertyRef Name="Representative" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rep_Event_Sponsionsevent">
+    <End Role="SponsionsEvent" Type="Self.SponsionsEvent" Multiplicity="0..1" />
+    <End Role="Rep_Event" Type="Self.Rep_Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SponsionsEvent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rep_Event">
+        <PropertyRef Name="Sponsionsevent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JKUSponsionsServiceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Location" EntityType="Self.Location" />
+    <EntitySet Name="Member" EntityType="Self.Member" />
+    <EntitySet Name="Rep_Event" EntityType="Self.Rep_Event" />
+    <EntitySet Name="Representative" EntityType="Self.Representative" />
+    <EntitySet Name="SponsionsEvent" EntityType="Self.SponsionsEvent" />
+    <AssociationSet Name="FK_SponsionsEvent_Location" Association="Self.FK_SponsionsEvent_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="SponsionsEvent" EntitySet="SponsionsEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_Sponsionsevent" Association="Self.FK_Member_Sponsionsevent">
+      <End Role="SponsionsEvent" EntitySet="SponsionsEvent" />
+      <End Role="Member" EntitySet="Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rep_Event_Representative" Association="Self.FK_Rep_Event_Representative">
+      <End Role="Representative" EntitySet="Representative" />
+      <End Role="Rep_Event" EntitySet="Rep_Event" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rep_Event_Sponsionsevent" Association="Self.FK_Rep_Event_Sponsionsevent">
+      <End Role="SponsionsEvent" EntitySet="SponsionsEvent" />
+      <End Role="Rep_Event" EntitySet="Rep_Event" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

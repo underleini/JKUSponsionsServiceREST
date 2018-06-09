@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JKUSponsionsServiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Matrikelnumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Firstname" Type="nvarchar(max)" />
+    <Property Name="Lastname" Type="nvarchar(max)" />
+    <Property Name="Curricula" Type="nvarchar(max)" />
+    <Property Name="MasterThesis" Type="nvarchar(max)" />
+    <Property Name="Sponsionsevent" Type="int" />
+  </EntityType>
+  <EntityType Name="Rep_Event">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sponsionsevent" Type="int" />
+    <Property Name="Representative" Type="int" />
+  </EntityType>
+  <EntityType Name="Representative">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Firstname" Type="nvarchar(max)" />
+    <Property Name="Lastname" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="SponsionsEvent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SponsionsDate" Type="datetime" />
+    <Property Name="Location" Type="int" />
+  </EntityType>
+  <Association Name="FK_Member_Sponsionsevent">
+    <End Role="SponsionsEvent" Type="Self.SponsionsEvent" Multiplicity="0..1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SponsionsEvent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="Sponsionsevent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rep_Event_Representative">
+    <End Role="Representative" Type="Self.Representative" Multiplicity="0..1" />
+    <End Role="Rep_Event" Type="Self.Rep_Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Representative">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rep_Event">
+        <PropertyRef Name="Representative" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rep_Event_Sponsionsevent">
+    <End Role="SponsionsEvent" Type="Self.SponsionsEvent" Multiplicity="0..1" />
+    <End Role="Rep_Event" Type="Self.Rep_Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SponsionsEvent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rep_Event">
+        <PropertyRef Name="Sponsionsevent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SponsionsEvent_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="SponsionsEvent" Type="Self.SponsionsEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SponsionsEvent">
+        <PropertyRef Name="Location" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JKUSponsionsServiceModelStoreContainer">
+    <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rep_Event" EntityType="Self.Rep_Event" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Representative" EntityType="Self.Representative" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SponsionsEvent" EntityType="Self.SponsionsEvent" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Member_Sponsionsevent" Association="Self.FK_Member_Sponsionsevent">
+      <End Role="SponsionsEvent" EntitySet="SponsionsEvent" />
+      <End Role="Member" EntitySet="Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rep_Event_Representative" Association="Self.FK_Rep_Event_Representative">
+      <End Role="Representative" EntitySet="Representative" />
+      <End Role="Rep_Event" EntitySet="Rep_Event" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rep_Event_Sponsionsevent" Association="Self.FK_Rep_Event_Sponsionsevent">
+      <End Role="SponsionsEvent" EntitySet="SponsionsEvent" />
+      <End Role="Rep_Event" EntitySet="Rep_Event" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SponsionsEvent_Location" Association="Self.FK_SponsionsEvent_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="SponsionsEvent" EntitySet="SponsionsEvent" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
